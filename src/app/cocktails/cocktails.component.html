@@ -1,6 +1,6 @@
 <div class="container overflow-hidden">
     <div class="row w-100 mt-5">
-        <div class="col-10 pl-0 border input-group box-shadow border">
+        <div class="col-10 px-0 border input-group box-shadow border" style="height: 40px;">
             <div class="input-group-prepend">
                 <span class="input-group-text border-top-0 border-left-0 border-bottom-0">
                     <i class="fa fa-search"></i>
@@ -9,43 +9,58 @@
             <input type="text" [(ngModel)]="searchText" placeholder="Search for Cocktail Name...!"
                 class="form-control border-0">
         </div>
-        <div class="col-2 pr-0 float-right input-group box-shadow">
-            <select>
+        <div class="col-2 pr-0 float-right input-group box-shadow" style="height: 40px;">
+            <mat-form-field appearance="fill">
+                <mat-label>Select Filter</mat-label>
+                <mat-select [formControl]="filterControl">
+                    <mat-option (click)="removeFilter()">-- None --</mat-option>
+                    <mat-optgroup *ngFor="let group of filterGroups" [label]="group.name">
+                        <mat-option *ngFor="let cocktail of group.cocktail" [value]="cocktail" (click)="clickedValue()">
+                            {{cocktail}}
+                        </mat-option>
+                    </mat-optgroup>
+                </mat-select>
+            </mat-form-field>
+            <!-- <select>
                 <option value="0">-- Select Cocktail Filter --</option>
                 <option value="Category"> Category</option>
                 <option value="Ingredients"> Ingredients</option>
-            </select>
+            </select> -->
         </div>
     </div>
     <div class="row">
-        <table align="right" class="my-4 mx-5 text-center table table-striped">
+        <table align="right" class="my-4 mx-5 text-center table table-striped" matSort
+            (matSortChange)="sortData($event)">
             <thead>
                 <tr class="text-center">
-                    <th class="px-4">Image</th>
-                    <th class="px-2">Name</th>
-                    <th class="px-2">Category</th>
-                    <th class="px-2">Top Ingredients</th>
+                    <th class="px-4" *ngIf=cocktails[0]?.strDrinkThumb>Image</th>
+                    <th class="pl-5" mat-sort-header="strDrink" *ngIf=cocktails[0]?.strDrink>Name</th>
+                    <th class="pl-5" mat-sort-header="strCategory" *ngIf=cocktails[0]?.strCategory>Category</th>
+                    <th class="pl-5" mat-sort-header="strAlcoholic" *ngIf=cocktails[0]?.strAlcoholic>is Alcoholic</th>
+                    <th class="pl-5" *ngIf=cocktails[0]?.strIngredient1>Top Ingredients</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let cocktail of cocktails | searchPipe : searchText | paginate: { itemsPerPage: 5, currentPage: p }; let i = index;"
                     class="mt-2 pb-2">
                     <td class="px-4 py-2">
-                        <img src={{cocktail.strDrinkThumb}} style="height: 50px;width: 50px;">
+                        <img src={{cocktail?.strDrinkThumb}} style="height: 50px;width: 50px;">
                     </td>
                     <td class="px-4 py-2">
-                        <a routerLink={{cocktail.strDrink}}>{{cocktail.strDrink}}</a>
+                        <a routerLink={{cocktail?.strDrink}}>{{cocktail?.strDrink}}</a>
                     </td>
-                    <td class="px-4 py-2">{{cocktail.strCategory}}</td>
-                    <td class="px-4 py-2">{{cocktail.strIngredient1}} , {{cocktail.strIngredient2}} ,
-                        {{cocktail.strIngredient3}} </td>
+                    <td class="px-4 py-2" *ngIf=cocktail?.strCategory>{{cocktail?.strCategory}}</td>
+                    <td class="px-4 py-2" *ngIf=cocktail?.strAlcoholic>{{cocktail?.strAlcoholic}}</td>
+                    <td class="px-4 py-2">
+                        <span *ngIf=cocktail?.strIngredient1>{{cocktail?.strIngredient1}}</span>
+                        <span *ngIf=cocktail?.strIngredient2> , {{cocktail?.strIngredient2}} </span>
+                        <span *ngIf=cocktail?.strIngredient3> , {{cocktail?.strIngredient3}} </span>
+                    </td>
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
-
-
 
 <!-- paginate div -->
 <div class="row">

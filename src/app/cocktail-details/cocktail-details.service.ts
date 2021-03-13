@@ -5,15 +5,15 @@ import { ConfigService } from '../config.service';
 @Injectable({
   providedIn: 'root'
 })
-export class CocktailsService {
+export class CocktailDetailsService {
 
   constructor(private http: HttpClient, private config: ConfigService) { }
 
-  getCocktailFilter(filterData, callback, errCallback) {
-    this.http.get("https://www.thecocktaildb.com/api/json/v1/1/" + filterData).subscribe(data => {
+  getCocktail(name, callback, errCallback) {
+    this.http.get("https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + name).subscribe((data) => {
       callback(data);
     }, err => {
-      errCallback(err);
+      errCallback(err.stack);
     })
   }
 

@@ -8,13 +8,17 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { routing } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CocktailsComponent } from './cocktails/cocktails.component';
-import { SearchPipePipe } from './pipes/search-pipe.pipe';
+import { searchPipe } from './pipes/search-pipe.pipe';
+import { CocktailDetailsComponent } from './cocktail-details/cocktail-details.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material-module';
 
 @NgModule({
   declarations: [
     AppComponent,
     CocktailsComponent,
-    SearchPipePipe
+    searchPipe,
+    CocktailDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -23,10 +27,12 @@ import { SearchPipePipe } from './pipes/search-pipe.pipe';
     HttpClientModule,
     NgbModule,
     NgxPaginationModule,
+    BrowserAnimationsModule,
+    MaterialModule,
     routing
   ],
-  schemas:[CUSTOM_ELEMENTS_SCHEMA],
-  exports:[SearchPipePipe],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  exports: [searchPipe],
   providers: [],
   bootstrap: [AppComponent]
 })

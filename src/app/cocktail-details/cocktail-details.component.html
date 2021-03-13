@@ -1,0 +1,26 @@
+<div class="container">
+    <h3 class="justify-content-center align-content-center d-flex m-3">
+        {{cocktail_name}}</h3>
+    <div *ngFor="let cocktail of cocktails" class="mb-3">
+        <div class="row py-3 border">
+            <div class="col-4">
+                <img src="{{cocktail?.strDrinkThumb}}" class=" w-100">
+            </div>
+            <div class="col-8">
+                <p><label class="mx-2"> Name </label> : {{cocktail?.strDrink}}</p>
+                <p> <label class="mx-2"> Drink Code </label> : {{cocktail?.idDrink}}</p>
+                <p> <label class="mx-2"> Is It Alcoholic </label> : {{cocktail?.strAlcoholic}}</p>
+                <p> <label class="mx-2"> Category / Bar Special </label> : {{cocktail?.strCategory}} /
+                    {{cocktail?.strCreativeCommonsConfirmed}}</p>
+                <p> <label class="mx-2"> Served in </label> : {{cocktail?.strGlass}}</p>
+                <p> <label class="mx-2"> 3 Main Ingredient </label> : {{cocktail?.strIngredient1}},
+                    {{cocktail?.strIngredient2}},
+                    {{cocktail?.strIngredient3}}</p>
+                <p> <label class="mx-2"> Instructions </label> : {{cocktail?.strInstructions}}</p>
+                <p> <label class="mx-2"> Quantity </label> : {{cocktail?.strMeasure1}},
+                    {{cocktail?.strMeasure2}},
+                    {{cocktail?.strMeasure3}}</p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -3,7 +3,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({
   name: 'searchPipe'
 })
-export class SearchPipePipe implements PipeTransform {
+export class searchPipe implements PipeTransform {
   transform(value, args?): Array<any> {
     const searchText = new RegExp(args, 'ig');
     if (value) {

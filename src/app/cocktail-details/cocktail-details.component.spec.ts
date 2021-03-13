@@ -1,22 +1,22 @@
 import { HttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CocktailsComponent } from './cocktails.component';
+import { CocktailDetailsComponent } from './cocktail-details.component';
 
-describe('CocktailsComponent', () => {
-  let component: CocktailsComponent;
-  let fixture: ComponentFixture<CocktailsComponent>;
+describe('CocktailDetailsComponent', () => {
+  let component: CocktailDetailsComponent;
+  let fixture: ComponentFixture<CocktailDetailsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CocktailsComponent ],
-      imports:[HttpClient ]
+      declarations: [ CocktailDetailsComponent ],
+      imports:[HttpClient]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CocktailsComponent);
+    fixture = TestBed.createComponent(CocktailDetailsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
